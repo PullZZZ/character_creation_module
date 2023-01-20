@@ -7,6 +7,52 @@ from random import randint
 from graphic_arts.start_game_banner import run_screensaver
 
 
+DEFAULT_ATTACK = 5
+DEFAULT_DEFENCE = 10
+
+
+class Character:
+    # Константа для диапазона очков урона.
+    RANGE_VALUE_ATTACK = (1, 3)
+    RANGE_VALUE_DEFENCE = (1, 5)
+    SPECIAL_SKILL = 'Удача'
+    SPECIAL_BUFF = 15
+
+    def __init__(self, name):
+        self.name = name
+
+    # Объявляем метод атаки
+    def attack(self):
+        # Вместо диапазона записана переменная класса.
+        # Оператор * распаковывает передаваемый кортеж.
+        value_attack = DEFAULT_ATTACK + randint(*self.RANGE_VALUE_ATTACK)
+        return (f'{self.name} нанёс противнику урон, равный {value_attack}')
+
+    # Объявляем метод защиты.
+    def defence(self):
+        # Вычисляем значение защиты в переменной value_defence.
+        value_defence = DEFAULT_DEFENCE + randint(*self.RANGE_VALUE_DEFENCE)
+        return (f'{self.name} блокировал {value_defence} ед. урона.')
+
+    # Объявляем метод специального умения.
+    def special(self):
+        # Здесь описано тело метода special().
+        return (f'{self.name} применил специальное умение '
+                f'"{self.SPECIAL_SKILL} {self.SPECIAL_BUFF}".')
+
+
+class Warrior(Character):
+    ...
+
+
+class Mage(Character):
+    ...
+
+
+class Healer(Character):
+    ...
+
+
 def attack(char_name: str, char_class: str) -> str:
     """Рассчитывает нанесенный урон."""
     if char_class == 'warrior':
